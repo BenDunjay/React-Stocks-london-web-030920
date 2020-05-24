@@ -64,15 +64,23 @@ class MainContainer extends Component {
 
   filterStockByPriceOrAlphabet = () => {
     const newlyArrangedStock = [...this.state.stocks]
-    if (this.state.priceOrSorted === ""){
-      return this.state.stocks
+    if (this.state.priceOrSorted === "Alphabetically"){
+      return this.arrangeByName(newlyArrangedStock)
     }
     else if (this.state.priceOrSorted === "Price"){
-      return newlyArrangedStock.sort((a,b) => a.price > b.price ? 1 : -1)
+      return this.arrangeByPrice(newlyArrangedStock)
     }
     else {
-      return newlyArrangedStock.sort((a,b) => a.name > b.name ? 1 : -1)
+      return this.state.stocks
     }
+  }
+
+  arrangeByName = (array) => {
+    return array.sort((a,b) => a.name > b.name ? 1 : -1)
+  }
+
+  arrangeByPrice = (array) => {
+    return array.sort((a,b) => a.price > b.price ? 1 : -1)
   }
 
   availableStocks = () => {
